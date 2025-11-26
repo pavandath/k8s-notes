@@ -1,5 +1,4 @@
-
-####5. Service
+#### 5. Service
 - Pods will be having ip's but these are not static, once the pods get restarted those ip's will change.
 - So in order to pods to have static ip's we use service.
 - There will be two ports container port and node port same as docker if we provide docker port then it will assign or else it will automatically assign a random port
@@ -90,5 +89,12 @@ Client → Node IP (any worker) : NodePort
         ↓
     Sends traffic to the Pod's targetPort (containerPort)
 
+**NOTE:**
+#####How Clusterip works?
+- "In Kubernetes, pods have dynamic IP addresses that change whenever they restart or get recreated. This creates a major problem for inter-pod communication since you can't rely on stable IP addresses. The solution is Kubernetes Services, which provide a permanent, stable endpoint. When Pod A needs to communicate with Pod B, it simply uses the service name and port (e.g., blue-service:80) instead of direct pod IPs.
+
+- Here's the magic of HOW it works: When a pod calls blue-service:80, Kubernetes DNS resolves it to a virtual ClusterIP (like 10.96.x.x), but this IP doesn't actually exist on the network. Instead, iptables/ipvs rules on the node intercept the request and redirect it directly to one of the healthy pod IPs behind the service. The ClusterIP acts only as a discovery mechanism, while the actual communication happens as direct pod-to-pod traffic.
+
+- Behind the scenes, the service automatically tracks all current pod IPs through continuous endpoint updates. This abstraction layer ensures that even though individual pods come and go with changing IPs, the communication between services remains reliable and consistent through this intelligent interception and routing system."
 
 
