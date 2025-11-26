@@ -1,3 +1,9 @@
+**NOTE:**  Ingress creates Google's L7 load balancer that reads HTTP paths (/blue, /green) and routes intelligently.
+           Service LoadBalancer = L4 (routes by IP:port), Ingress = L7 (routes by HTTP paths/hosts)
+
+           LoadBalancer Service → L4 Load Balancer (TCP/UDP)
+           Ingress Resource    → L7 Load Balancer (HTTP/HTTPS)
+           
 - So the disadvantage of the Loadbalancer is for each micro service we need to assign a loadbalancer and to manage all the loadbalancers we need to assign one more laodbalancer which increases cost and complexity.
 - We can overcome with the ingress controller, it is also an k8s api object used to enable external access to the services that are within the cluster.
 - We can configure both http and https.
