@@ -80,4 +80,7 @@
 - Now all the pods without nodeSelector will go and deploy to w1 because it is high end machine
 - Now the an actual pod  with with nodeSelector app=ml came but it is in pending state because w1 is already full with other pods
 - Now we need a solution for this, now we need a solution where nodes can be having their own priorities.  
-- Solution is to use Taints and Tolerations 
+- Solution is to use Taints and Tolerations
+- - taints will be applicable at node level
+- tolerations will be applicable at pod level
+- tolerations that are having colour blue can be scheduled to the node which is having blue taint and that node will not accept any other pod which is not having blue toleration
