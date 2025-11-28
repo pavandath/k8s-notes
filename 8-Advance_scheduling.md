@@ -18,7 +18,9 @@
 - Node selector
 - node affinity or anti affinity
 - taints and tolerations
-**1 Node Name*:
+
+
+**1 Node Name**:
 - If we want to schedule a pod to a specific node we can use nodeName field in the pod spec.
 - Mentioning  node name is  not correct because if node is not having capacity then it will be pending state
 - To overcome this we use nodeSelector
