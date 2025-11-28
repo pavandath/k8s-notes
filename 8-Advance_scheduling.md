@@ -84,3 +84,6 @@
 - - taints will be applicable at node level
 - tolerations will be applicable at pod level
 - tolerations that are having colour blue can be scheduled to the node which is having blue taint and that node will not accept any other pod which is not having blue toleration
+- Nodeselector is used in taints and tolerations because Nodeselector tells the scheduler to schedule the pod on specific node and taints and tolerations tells if the pod is allowed to be scheduled on that node or not
+-  master node will be having taints thats why we cannot schedule any pod on master node unless we tolerate that taint
+
