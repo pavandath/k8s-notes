@@ -68,3 +68,16 @@
       - it is not mandatory to be an expression if it doesnt exist pod will be scheduled on some other node
 
 **NOTE:**: IgnoredDuringExecution means if node labels change after the pod is running, the pod won't be evicted/moved. 
+
+**Interview question:**
+
+- We are having 4 worker nodes w1, w2, w3, w4
+- and there is a pod which can  be deployed anywhere 
+- Now we have tell the pod that to go and deploy where nodeSelector colour=blue
+- Now where will the pod go?
+- It will be in pending state because none of the nodes are having that label
+- now Imagine w1 is a high costly machine wi app=ml label
+- Now all the pods without nodeSelector will go and deploy to w1 because it is high end machine
+- Now the an actual pod  with with nodeSelector app=ml came but it is in pending state because w1 is already full with other pods
+- Now we need a solution for this, now we need a solution where nodes can be having their own priorities.  
+- Solution is to use Taints and Tolerations 
