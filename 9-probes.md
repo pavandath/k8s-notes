@@ -1,4 +1,4 @@
-####What is probes?
+### What is probes?
 - Probes in k8s are health  checks for containers to verify if the container is healthy or not
 - types of probes:
   - liveness probe: to check whether the pod is alive or dead (if not alive then restart the pod)
