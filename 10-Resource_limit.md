@@ -74,4 +74,38 @@
 
 * Always leave a **20-30% buffer** above what the app actually consumes to handle unexpected spikes or traffic bursts.
 
+---
+
+# Kubernetes Memory: 502 vs 504 Explained
+
+## 🔄 What Actually Happens
+
+### Scenario 1: Fast Death → 502 Bad Gateway
+* **The Flow:** App starts → Immediately tries to allocate >512MB → **Killed instantly.**
+* **The Result:** The Load Balancer (or Ingress) tries to send traffic to the Pod, finds no active process, and reports: "Backend dead."
+* **Status:** `502 Bad Gateway`
+
+---
+
+### Scenario 2: Slow Death → 504 Gateway Timeout
+* **The Flow:** App is running fine → Gradually leaks or consumes memory → Hits the 512MB limit **while processing an active request.**
+* **The Result:** The process is killed mid-request. The connection hangs because the Load Balancer is waiting for a response that will never come.
+* **Status:** `504 Gateway Timeout`
+
+---
+
+### Scenario 3: Mixed Errors
+* **The Chaos:** You see a mix of both errors in your logs.
+* **Why:** * Some users hit a Pod that just died (**502**).
+    * Some users were in the middle of a transaction when the Pod hit its limit (**504**).
+* **Symptom:** Users report "random" instability or intermittent errors.
+
+---
+
+## 🛠 Summary Table
+
+| Error | Cause | Timing |
+| :--- | :--- | :--- |
+| **502** | Process is already dead or refused connection | Instant |
+| **504** | Process was killed mid-execution or hung | Delayed (Timeout) |
 
