@@ -1,48 +1,48 @@
-Kubernetes Resource Limits
-📌 Core Concept
-Resource limits in Kubernetes control how much CPU and memory containers can use in a Pod.
+## Kubernetes Resource Limits
+#### 📌 Core Concept
+- Resource limits in Kubernetes control how much CPU and memory containers can use in a Pod.
 
-🔧 Two Key Parts
-1. Requests
-What it is: Minimum resources the container needs to run
+## 🔧 Two Key Parts
+###1. Requests
+- What it is: Minimum resources the container needs to run
 
-Used for: Scheduling Pods to nodes
+- Used for: Scheduling Pods to nodes
 
-What happens:
+#### What happens:
 
-Kubernetes reserves this amount for your container
+- Kubernetes reserves this amount for your container
 
-If no node has enough resources → Pod stays in Pending state
+- If no node has enough resources → Pod stays in Pending state
 
-This is your guaranteed resources
+- This is your guaranteed resources
 
-2. Limits
-What it is: Maximum resources the container can use
+### 2. Limits
+- What it is: Maximum resources the container can use
 
-What happens when exceeded:
+#### What happens when exceeded:
 
-CPU limit exceeded → Container gets slowed down (throttled)
+- CPU limit exceeded → Container gets slowed down (throttled)
 
-Memory limit exceeded → Container gets killed and restarts (OOMKilled)
+- Memory limit exceeded → Container gets killed and restarts (OOMKilled)
 
-📊 How to Measure Resources
-Memory
-Measured in bytes
+### 📊 How to Measure Resources
+#### Memory
+- Measured in bytes
 
-Use these units:
+- Use these units:
 
-Mi = Megabytes (common size: 256Mi, 512Mi, 1Gi)
+- Mi = Megabytes (common size: 256Mi, 512Mi, 1Gi)
 
-Gi = Gigabytes
+- Gi = Gigabytes
 
-CPU
-Measured in CPU cores:
+#### CPU
+- Measured in CPU cores:
 
-1 = One full CPU core
+- 1 = One full CPU core
 
-0.5 = Half a CPU core
+- 0.5 = Half a CPU core
 
-500m = 0.5 CPU (500 millicores)
+- 500m = 0.5 CPU (500 millicores)
 
-100m = 0.1 CPU (100 millicores)
+- 100m = 0.1 CPU (100 millicores)
 
