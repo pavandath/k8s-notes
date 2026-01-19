@@ -46,3 +46,29 @@
 
 - 100m = 0.1 CPU (100 millicores)
 
+Quick Kubernetes Memory Notes
+🚨 Memory Limit Problem
+App needs 1GB → You give 512MB limit → Container gets killed
+
+Killed container = No service = 502/504 errors for users
+
+🔍 How to Spot
+Pod restarting constantly
+
+"OOMKilled" in pod events
+
+Users see "502 Bad Gateway"
+
+💡 Solution
+Set correct limits: Monitor app → See real usage → Set limit higher
+
+Example: App uses 1GB → Set 1.2-1.5GB limit
+
+Check with: kubectl describe pod (look for OOMKilled)
+
+⚠️ Golden Rule
+Low memory limit = Container killed = 502 errors
+
+Always leave 20-30% buffer above what app actually uses
+
+
