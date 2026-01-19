@@ -46,29 +46,32 @@
 
 - 100m = 0.1 CPU (100 millicores)
 
-Quick Kubernetes Memory Notes
-🚨 Memory Limit Problem
-App needs 1GB → You give 512MB limit → Container gets killed
+# Quick Kubernetes Memory Notes
 
-Killed container = No service = 502/504 errors for users
+## 🚨 Memory Limit Problem
+* **Scenario:** App needs 1GB → You give 512MB limit → **Container gets killed.**
+* **Impact:** Killed container = **No service** = **502/504 errors** for users.
 
-🔍 How to Spot
-Pod restarting constantly
+---
 
-"OOMKilled" in pod events
+## 🔍 How to Spot
+* **Behavior:** Pod restarting constantly.
+* **Status:** `OOMKilled` in pod events or container status.
+* **User Experience:** Users see "502 Bad Gateway" or "504 Gateway Timeout."
+* **Command:** Run `kubectl describe pod <pod-name>` and look at the `Last State` section.
 
-Users see "502 Bad Gateway"
+---
 
-💡 Solution
-Set correct limits: Monitor app → See real usage → Set limit higher
+## 💡 Solution
+* **Right-sizing:** Monitor app → Observe real-world usage → Set limit higher than peak usage.
+* **Example:** If app uses 1GB at peak → Set **1.2GB - 1.5GB** limit.
+* **Automation:** Use a Vertical Pod Autoscaler (VPA) if you want K8s to recommend these values for you.
 
-Example: App uses 1GB → Set 1.2-1.5GB limit
+---
 
-Check with: kubectl describe pod (look for OOMKilled)
+## ⚠️ Golden Rule
+> **Low memory limit = Container killed = 502 errors.**
 
-⚠️ Golden Rule
-Low memory limit = Container killed = 502 errors
-
-Always leave 20-30% buffer above what app actually uses
+* Always leave a **20-30% buffer** above what the app actually consumes to handle unexpected spikes or traffic bursts.
 
 
