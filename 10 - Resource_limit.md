@@ -3,7 +3,7 @@
 - Resource limits in Kubernetes control how much CPU and memory containers can use in a Pod.
 
 ## 🔧 Two Key Parts
-###1. Requests
+### 1. Requests
 - What it is: Minimum resources the container needs to run
 
 - Used for: Scheduling Pods to nodes
